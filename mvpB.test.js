@@ -30,9 +30,34 @@ describe('Sprint 7 Challenge Learner Tests', () => {
     [6] renders a text that includes "javaScript is pretty" (use exact = false)
   */
   test('you can comment out this test', () => {
-    expect(true).toBe(false)
+    expect(true).toBe(true)
   })
 })
+
+test('sum function throws an error for invalid inputs', () => {
+  expect(() => sum()).toThrow('pass valid numbers');
+  expect(() => sum(2, 'seven')).toThrow('pass valid numbers');
+});
+
+test('sum function returns correct results for valid inputs', () => {
+  expect(sum(1, 3)).toBe(4);
+  expect(sum('1', 2)).toBe(3);
+  expect(sum('10', '3')).toBe(13);
+});
+
+test('HelloWorld component renders links and texts', () => {
+  render(<HelloWorld />);
+
+  // Links
+  expect(screen.queryByText('Home')).toBeInTheDocument();
+  expect(screen.queryByText('About')).toBeInTheDocument();
+  expect(screen.queryByText('Blog')).toBeInTheDocument();
+
+  // Texts
+  expect(screen.queryByText('The Truth')).toBeInTheDocument();
+  expect(screen.queryByText('JavaScript is pretty awesome')).toBeInTheDocument();
+  expect(screen.queryByText('javaScript is pretty', { exact: false })).toBeInTheDocument();
+});
 
 function sum(a, b) {
   a = Number(a)
